@@ -93,7 +93,7 @@ class MultiHeadResNet(nn.Module):
         # backbone
         self.encoder = models.__dict__[arch]()
         self.feat_dim = self.encoder.fc.weight.shape[1]
-        self.encoder.fc = nn.Iforward_headsdentity()
+        self.encoder.fc = nn.Identity()
         # modify the encoder for lower resolution
         if low_res:
             self.encoder.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)

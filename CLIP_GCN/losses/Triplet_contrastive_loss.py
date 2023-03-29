@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 from online_triplet_loss.losses import *
+from data.data_utils import CFG
 
 def cross_entropy(preds, targets, reduction='none'):
   log_softmax = nn.LogSoftmax(dim=-1)
@@ -28,7 +29,7 @@ def contrastive_loss(image_encoding, text_encoding, labels):
 
   
   # Setting up the triplet loss
-  triplet_loss, fraction_pos = batch_all_triplet_loss(labels, image_encoding, squared=False, margin=2)
+  triplet_loss, fraction_pos = batch_all_triplet_loss(labels, image_encoding, squared=False, margin=CFG.margin)
   # triplet_loss2, fraction_pos2 = batch_all_triplet_loss(labels, text_encoding, squared=False, margin=2)
 
 
@@ -57,8 +58,7 @@ def contrastive_logits(image_encoding, text_encoding, labels):
 
   
   # Setting up the triplet loss
-  triplet_loss, fraction_pos = batch_all_triplet_loss(labels, image_encoding, squared=False, margin=2)
-  # triplet_loss2, fraction_pos2 = batch_all_triplet_loss(labels, text_encoding, squared=False, margin=2)
+  triplet_loss, fraction_pos = batch_all_triplet_loss(labels, image_encoding, squared=False, margin=0.8)
 
 
   self_loss = cross_entropy(self_logits, diagonal_targets, reduction='mean')

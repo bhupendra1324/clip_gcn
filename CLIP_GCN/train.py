@@ -63,7 +63,7 @@ if __name__ == '__main__':
             {"params": model.image_encoder.parameters(), "lr": CFG.image_encoder_lr},
             {"params": model.text_encoder.parameters(), "lr": CFG.text_encoder_lr},
         ]
-    optimizer = torch.optim.AdamW(params, weight_decay=0.)
+    optimizer = torch.optim.AdamW(params, weight_decay=0.01)
     lr_scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
             optimizer, mode="min", patience=CFG.patience, factor=CFG.factor
         )
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     )
 
     # Create model save path
-    MODEL_NAME = "cifar10_test.pth"
+    MODEL_NAME = "cub_testing.pth"
     MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
 
     # Save the model state dict

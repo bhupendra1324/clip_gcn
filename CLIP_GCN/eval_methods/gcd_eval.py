@@ -176,10 +176,7 @@ def epoch_acc(loaded_model):
     u_targets = targets[~mask_lab]       # Get unlabelled target
 
     print('Fitting Semi-Supervised K-Means...')
-    if CFG.dataset == 'cifar10':
-        n = 10
-    if CFG.dataset == 'sbcars':
-        n = 196
+    n = len(set(targets))
     kmeans = SemiSupKMeans(k=n, tolerance=1e-4, max_iterations=10000, init='k-means++',
                             n_init=10, random_state=None, n_jobs=None, pairwise_batch_size=1024, mode=None)
 

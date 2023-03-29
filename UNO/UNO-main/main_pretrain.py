@@ -121,7 +121,8 @@ class Pretrainer(pl.LightningModule):
 def main(args):
     # build datamodule
     dm = get_datamodule(args, "pretrain")
-
+    print(dm)
+    exit()
     # logger
     run_name = "-".join(["pretrain", args.arch, args.dataset, args.comment])
     wandb_logger = pl.loggers.WandbLogger(
